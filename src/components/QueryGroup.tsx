@@ -25,7 +25,7 @@ export default function QueryGroup({
 }: QueryGroupProps) {
   return (
     <Card className="mb-3">
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-2 px-4 pt-4">
         <div className="flex justify-between items-center">
           <CardTitle className="text-xs">Parameters</CardTitle>
           {canRemove && (
@@ -40,7 +40,7 @@ export default function QueryGroup({
           )}
         </div>
       </CardHeader>
-      <CardContent className="space-y-2">
+      <CardContent className="space-y-2 px-4 pb-4">
         {group.conditions.map((condition) => (
           <ConditionRow
             key={condition.id}

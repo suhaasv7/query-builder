@@ -148,7 +148,7 @@ export default function SavedQueries({ refreshTrigger }: SavedQueriesProps) {
             >
               <div className="flex gap-2">
                 <div className="flex-1">
-                  <label className="text-[10px] text-gray-500 mb-1 block">
+                  <label className="text-[10px] text-muted-foreground mb-1 block">
                     Title
                   </label>
                   <Input
@@ -160,7 +160,7 @@ export default function SavedQueries({ refreshTrigger }: SavedQueriesProps) {
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="text-[10px] text-gray-500 mb-1 block">
+                  <label className="text-[10px] text-muted-foreground mb-1 block">
                     Collection
                   </label>
                   <Input
@@ -178,14 +178,14 @@ export default function SavedQueries({ refreshTrigger }: SavedQueriesProps) {
                     <Textarea
                       value={editingQuery}
                       onChange={(e) => setEditingQuery(e.target.value)}
-                      className="bg-gray-900 text-gray-300 font-mono text-xs min-h-[120px]"
+                      className="bg-[#0a0a0a] text-foreground font-mono text-xs min-h-[120px]"
                       placeholder="MongoDB query"
                     />
                   ) : (
                     <Textarea
                       value={saved.query}
                       readOnly
-                      className="bg-gray-900 text-gray-300 font-mono text-xs min-h-[120px] cursor-default"
+                      className="bg-[#0a0a0a] text-foreground font-mono text-xs min-h-[120px] cursor-default"
                     />
                   )}
                 </div>

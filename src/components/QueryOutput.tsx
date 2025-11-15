@@ -98,7 +98,7 @@ export default function QueryOutput({ query, onCopy }: QueryOutputProps) {
           </div>
         </CardHeader>
         <CardContent>
-          <pre className="bg-gray-900 text-gray-300 p-2 rounded border border-gray-700 overflow-x-auto font-mono text-xs leading-relaxed whitespace-pre-wrap break-words">
+          <pre className="bg-[#0a0a0a] text-foreground p-2 rounded border border-border overflow-x-auto font-mono text-xs leading-relaxed whitespace-pre-wrap break-words">
             {query}
           </pre>
         </CardContent>

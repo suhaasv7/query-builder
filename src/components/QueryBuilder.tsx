@@ -3,7 +3,6 @@ import Header from "./Header";
 import QueryGroupComponent from "./QueryGroup";
 import QueryOutput from "./QueryOutput";
 import SavedQueries from "./SavedQueries";
-import { Card, CardContent } from "@/components/ui/card";
 import type { QueryGroup, Operator } from "../types";
 import { getMongoCompassQuery } from "../utils/queryBuilder";
 
@@ -87,27 +86,23 @@ export default function QueryBuilder() {
 
   // Return
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen bg-background">
       <Header />
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-          <Card>
-            <CardContent className="pt-6">
-              <QueryGroupComponent
-                group={queryGroup}
-                groupIndex={0}
-                operators={operators}
-                canRemove={false}
-                showLogicOperator={false}
-                onAddCondition={addCondition}
-                onRemoveCondition={removeCondition}
-                onUpdateCondition={updateCondition}
-                onRemoveGroup={() => {}}
-                onUpdateLogicOperator={() => {}}
-              />
-            </CardContent>
-          </Card>
+          <QueryGroupComponent
+            group={queryGroup}
+            groupIndex={0}
+            operators={operators}
+            canRemove={false}
+            showLogicOperator={false}
+            onAddCondition={addCondition}
+            onRemoveCondition={removeCondition}
+            onUpdateCondition={updateCondition}
+            onRemoveGroup={() => {}}
+            onUpdateLogicOperator={() => {}}
+          />
 
           <QueryOutput
             query={getMongoCompassQuery(queryGroup)}
