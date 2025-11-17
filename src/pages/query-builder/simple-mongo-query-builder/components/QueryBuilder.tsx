@@ -86,7 +86,7 @@ export default function QueryBuilder() {
 
   // Return
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       <Header />
 
       <div className="max-w-6xl mx-auto px-4">

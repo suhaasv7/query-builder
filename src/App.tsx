@@ -1,11 +1,11 @@
-import QueryBuilder from "./components/QueryBuilder";
+import QueryBuilderPage from "./pages/query-builder/QueryBuilderPage";
 import { Toaster } from "@/components/ui/toaster";
 
 // Return
 function App() {
   return (
     <>
-      <QueryBuilder />
+      <QueryBuilderPage />
       <Toaster />
     </>
   );
