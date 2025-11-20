@@ -78,6 +78,23 @@ export default function SavedQueries({ refreshTrigger }: SavedQueriesProps) {
     window.dispatchEvent(new Event("queriesUpdated"));
   };
 
+  const duplicateQuery = (query: SavedQuery) => {
+    const duplicatedQuery: SavedQuery = {
+      id: Date.now().toString(),
+      query: query.query,
+      title: `${query.title || "Untitled"} (Copy)`,
+      collection: query.collection || "",
+      timestamp: Date.now(),
+    };
+
+    const updated = [duplicatedQuery, ...savedQueries];
+    // Keep only the latest 10 queries
+    const limitedQueries = updated.slice(0, 10);
+    setSavedQueries(limitedQueries);
+    localStorage.setItem("mongoQueries", JSON.stringify(limitedQueries));
+    window.dispatchEvent(new Event("queriesUpdated"));
+  };
+
   // useEffect
   useEffect(() => {
     const loadSavedQueries = () => {
@@ -172,7 +189,7 @@ export default function SavedQueries({ refreshTrigger }: SavedQueriesProps) {
                   />
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <div className="flex-1">
                   {editingQueryId === saved.id ? (
                     <Textarea
@@ -189,14 +206,14 @@ export default function SavedQueries({ refreshTrigger }: SavedQueriesProps) {
                     />
                   )}
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 w-36 flex-shrink-0">
                   {editingQueryId === saved.id ? (
                     <>
                       <Button
                         onClick={() => saveQuery(saved.id)}
-                        variant="default"
+                        variant="outline"
                         size="sm"
-                        className="h-8 text-xs"
+                        className="h-8 text-xs w-full border-white text-white hover:bg-white/10"
                       >
                         Save
                       </Button>
@@ -204,38 +221,46 @@ export default function SavedQueries({ refreshTrigger }: SavedQueriesProps) {
                         onClick={cancelEditingQuery}
                         variant="outline"
                         size="sm"
-                        className="h-8 text-xs"
+                        className="h-8 text-xs w-full border-white text-white hover:bg-white/10"
                       >
                         Cancel
                       </Button>
                     </>
                   ) : (
-                    <>
+                    <div className="grid grid-cols-2 gap-2">
                       <Button
                         onClick={() => startEditingQuery(saved)}
-                        variant="default"
+                        variant="outline"
                         size="sm"
-                        className="h-8 text-xs"
+                        className="h-8 text-xs border-white text-white hover:bg-white/10"
                       >
                         Edit
                       </Button>
                       <Button
                         onClick={() => copyQuery(saved.query)}
-                        variant="secondary"
+                        variant="outline"
                         size="sm"
-                        className="h-8 text-xs"
+                        className="h-8 text-xs border-white text-white hover:bg-white/10"
                       >
                         Copy
                       </Button>
                       <Button
-                        onClick={() => deleteQuery(saved.id)}
-                        variant="destructive"
+                        onClick={() => duplicateQuery(saved)}
+                        variant="outline"
                         size="sm"
-                        className="h-8 text-xs"
+                        className="h-8 text-xs border-white text-white hover:bg-white/10"
+                      >
+                        Duplicate
+                      </Button>
+                      <Button
+                        onClick={() => deleteQuery(saved.id)}
+                        variant="outline"
+                        size="sm"
+                        className="h-8 text-xs border-red-500 text-red-500 hover:bg-red-500/10"
                       >
                         Clear
                       </Button>
-                    </>
+                    </div>
                   )}
                 </div>
               </div>
