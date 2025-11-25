@@ -4,24 +4,24 @@ A minimal, functional web application for building MongoDB queries visually. Thi
 
 ## Features
 
-- **Visual Query Builder**: Build MongoDB queries using a simple form interface
-- **Multiple Operators**: Support for various MongoDB operators including:
-  - Equals (=)
-  - Not Equals (!=)
-  - Greater Than (>)
-  - Greater Than or Equal (>=)
-  - Less Than (<)
-  - Less Than or Equal (<=)
-  - In
-  - Not In
-  - Regex
-  - Exists
+- **Dual Mode Interface**:
+  - **Simple Query Builder**: Visual interface for building standard MongoDB queries
+  - **Aggregation Pipeline**: (Coming Soon) Visual builder for complex aggregation pipelines
 
-- **Multiple Data Types**: Support for different value types:
-  - String
-  - Number
-  - Boolean
-  - Date
+- **Simple Query Builder**:
+  - **Visual Interface**: Build MongoDB queries using a simple form interface
+  - **Multiple Operators**: Support for various MongoDB operators including:
+    - Equals (=)
+    - Not Equals (!=)
+    - Greater Than (>)
+    - Greater Than or Equal (>=)
+    - Less Than (<)
+    - Less Than or Equal (<=)
+    - In
+    - Not In
+    - Regex
+    - Exists
+  - **Multiple Data Types**: Support for String, Number, Boolean, and Date
 
 - **Query History**:
   - Automatically saves copied queries to localStorage
@@ -30,7 +30,7 @@ A minimal, functional web application for building MongoDB queries visually. Thi
   - Delete individual queries or clear all at once
   - Real-time updates without page refresh
 
-- **MongoDB Compass Compatible**: Generates queries in the exact format used by MongoDB Compass, ready to copy and paste
+- **MongoDB Compass Compatible**: Generates queries in the exact format used by MongoDB Compass
 
 - **Minimal Design**: Clean, functional interface focused on productivity
 
@@ -74,19 +74,19 @@ The built files will be in the `dist` directory.
 
 ## Usage
 
-1. **Add Parameters**: Use the "Parameters" section to add query conditions
-   - Enter the field name
-   - Select an operator
-   - Choose the value type
-   - Enter the value
+1. **Navigation**: Use the sidebar to switch between "Simple Query Builder" and "Aggregation Pipeline" modes.
 
-2. **Add Multiple Conditions**: Click "+ Add Condition" to add more query parameters
+2. **Simple Query Builder**:
+   - **Add Parameters**: Use the "Parameters" section to add query conditions
+     - Enter the field name
+     - Select an operator
+     - Choose the value type
+     - Enter the value
+   - **Add Multiple Conditions**: Click "+ Add Condition" to add more query parameters
+   - **View Generated Query**: The MongoDB Compass query appears in the right panel in real-time
+   - **Copy Query**: Click the "Copy" button to copy the query to your clipboard. The query is automatically saved to your query history
 
-3. **View Generated Query**: The MongoDB Compass query appears in the right panel in real-time
-
-4. **Copy Query**: Click the "Copy" button to copy the query to your clipboard. The query is automatically saved to your query history
-
-5. **Manage Saved Queries**:
+3. **Manage Saved Queries**:
    - View all previously copied queries below the main panels
    - Click "Copy" on any saved query to copy it again
    - Click "×" to delete individual queries
@@ -98,27 +98,23 @@ The built files will be in the `dist` directory.
 - **TypeScript** - Type safety
 - **Vite** - Build tool and dev server
 - **Tailwind CSS** - Styling (via CDN)
+- **Shadcn UI** - UI Components
+- **Lucide React** - Icons
 
 ## Project Structure
 
 ```text
 src/
 ├── components/
-│   ├── ConditionRow.tsx      # Individual condition input row
-│   ├── Header.tsx            # App header
-│   ├── QueryBuilder.tsx       # Main query builder component
-│   ├── QueryGroup.tsx        # Query group container
-│   ├── QueryOutput.tsx       # Query output display
-│   └── SavedQueries.tsx      # Saved queries management
-├── types/
-│   ├── ConditionRow.d.ts      # Type definitions
-│   ├── Header.d.ts
-│   ├── QueryBuilder.d.ts
-│   ├── QueryGroup.d.ts
-│   └── QueryOutput.d.ts
-├── utils/
-│   └── queryBuilder.ts       # Query building logic
-├── types.ts                  # Shared type definitions
+│   └── ui/                   # Reusable UI components (Shadcn)
+├── pages/
+│   └── query-builder/
+│       ├── mongo-aggregation/        # Aggregation pipeline feature
+│       ├── simple-mongo-query-builder/ # Simple query builder feature
+│       │   └── components/           # Feature-specific components
+│       └── QueryBuilderPage.tsx      # Main page wrapper
+├── hooks/                    # Custom hooks (use-toast, etc.)
+├── lib/                      # Utility libraries
 ├── App.tsx                   # Root component
 └── main.tsx                  # Entry point
 ```

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import SimpleMongoQueryBuilder from "./simple-mongo-query-builder/components/QueryBuilder";
 import MongoAggregation from "./mongo-aggregation/MongoAggregation";
 import {
@@ -70,8 +71,32 @@ export default function QueryBuilderPage() {
           </h1>
         </header>
         <div className="flex-1">
-          {activeTab === "simple" && <SimpleMongoQueryBuilder />}
-          {activeTab === "aggregation" && <MongoAggregation />}
+          <AnimatePresence mode="wait">
+            {activeTab === "simple" && (
+              <motion.div
+                key="simple"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="h-full"
+              >
+                <SimpleMongoQueryBuilder />
+              </motion.div>
+            )}
+            {activeTab === "aggregation" && (
+              <motion.div
+                key="aggregation"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="h-full"
+              >
+                <MongoAggregation />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </SidebarInset>
     </SidebarProvider>
