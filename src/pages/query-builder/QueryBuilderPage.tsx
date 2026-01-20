@@ -5,6 +5,7 @@ import MongoAggregation from "./mongo-aggregation/MongoAggregation";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -15,14 +16,20 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Database, GitBranch } from "lucide-react";
+import { Database, GitBranch, Moon, Sun } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { useTheme } from "@/hooks/use-theme";
 
 type Tab = "simple" | "aggregation";
 
 // Return
 export default function QueryBuilderPage() {
   const [activeTab, setActiveTab] = useState<Tab>("simple");
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <SidebarProvider>
@@ -59,6 +66,20 @@ export default function QueryBuilderPage() {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
+        <SidebarFooter className="border-t">
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton onClick={toggleTheme}>
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+                <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
       </Sidebar>
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
